@@ -13,7 +13,6 @@ tools=(
   libwebkit2gtk-4.0-dev
   libgirepository1.0-dev
   ninja-build
-  curl
   git-all
   dirmngr
   gpg
