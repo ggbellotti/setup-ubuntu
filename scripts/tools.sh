@@ -52,4 +52,6 @@ done
 
 cargo install exa bat rust
 
+sudo dpkg-reconfigure libdvd-pkg
+
 echo "------ All tools have been installed."

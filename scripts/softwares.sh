@@ -52,6 +52,8 @@ snapRepos=(
   telegram-desktop
   whatsie
   zoom-client
+  vlc
+  audacity
 )
 
 # Check if the ppa of the packages below have been added
