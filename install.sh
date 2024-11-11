@@ -19,12 +19,10 @@ source scripts/add-ppas.sh
 
 source scripts/drivers-gpu.sh
 
-source scripts/tools.sh
-
 source scripts/apps.sh
 
 source scripts/gnome-utils.sh
 
-source scripts/softwares.sh
-
 source scripts/customization.sh
+
+source scripts/bye-bye.sh

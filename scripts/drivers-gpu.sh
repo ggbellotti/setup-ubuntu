@@ -8,6 +8,7 @@ elif [[ $gpu == *"AMD"* ]] || [[ $gpu == *"Radeon"* ]]; then
     echo "------ Placa de vídeo AMD detectada. Instalando o driver da AMD..."
     sudo apt update
     sudo apt install mesa-vulkan-drivers mesa-vulkan-drivers:i386 -y
+    sudo apt install amdgpu-dkms rocm-hip-libraries -y
 else
     echo "------ Placa de vídeo não identificada ou não requer driver adicional."
 fi

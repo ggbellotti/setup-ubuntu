@@ -1,0 +1,12 @@
+[user]
+	email = guibellotti@hotmail.com
+	name = Guilherme G. Bellotti
+
+[core]
+	editor = code --wait
+	excludesfile = ~/.gitignore_global
+
+[alias]
+	ci = "!f() { git commit -m \"$*\"; }; f"
+	pom = push -u origin main
+	start = "!f() { git remote add origin \"$*\"; }; f"
