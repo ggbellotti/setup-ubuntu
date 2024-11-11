@@ -1,6 +1,6 @@
 echo -e "${colors[green]}------------ Customization ------------"
 
-source update-system.sh
+source ~/setup-ubuntu/scripts/update-system.sh
 
 echo "------ Create folders and copy files..."
 mkdir ~/Videos/OBS
@@ -12,28 +12,35 @@ echo "------ Generate SSH..."
 ssh-keygen -t rsa -C "guibellotti@hotmail.com" -f ~/.ssh/guilhermebellotti -N ""
 
 echo "------ Download themes, cursor, wallpapers etc..."
-BIBATA="https://api.github.com/repos/ful1e5/Bibata_Cursor/releases/latest"
-DOWNLOAD_URL=$(curl -s $BIBATA | jq -r '.assets[] | select(.name | endswith(".tar.xz")).browser_download_url')
-if [ -z "$DOWNLOAD_URL" ]; then
-    echo "URL de download não encontrada."
-    exit 1
-fi
-echo "Baixando $DOWNLOAD_URL..."
-curl -L -o "Bibata.tar.gz" "$DOWNLOAD_URL"
-mv Bibata-* ~/.icons/
-echo "Download completo."
 
-echo "------ Installing themes..."
-cd
-git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git --depth=1
-git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git --depth=1
-cd ~/WhiteSur-gtk-theme && chmod +x install.sh && ./install.sh && ./tweaks.sh -F && sudo ./tweaks.sh -g
+install_theme() {
+  local REPO_URL=$1
+  local THEME_NAME=$2
+  local INSTALL_OPTIONS=$3
 
-echo "------ Installing icons..."
-cd ~/WhiteSur-icon-theme && chmod +x install.sh && ./install.sh -b
+  local THEME_DIR="$HOME/.icons/$THEME_NAME"
+
+  echo "Clonando o repositório $THEME_NAME..."
+  git clone --depth=1 "$REPO_URL" "$THEME_DIR"
+
+  echo "Instalando $THEME_NAME..."
+  cd "$THEME_DIR" || exit
+  chmod +x install.sh
+  ./install.sh $INSTALL_OPTIONS
+
+  echo "Atualizando o cache de ícones para $THEME_NAME..."
+  gtk-update-icon-cache "$THEME_DIR"
+  echo "Instalação de $THEME_NAME concluída!"
+}
+
+# Instalar WhiteSur icons
+install_theme "https://github.com/vinceliuice/WhiteSur-icon-theme.git" "WhiteSur-icon-theme" "-b"
+
+# Instalar Apple cursor
+install_theme "https://github.com/ful1e5/apple_cursor.git" "apple_cursor"
 
 echo "------ Installing fonts..."
-source customization/fonts.sh
+source ~/setup-ubuntu/scripts/customization/fonts.sh
 
 echo "------ Configuration shell..."
-source customization/shell.sh
+source ~/setup-ubuntu/scripts/customization/shell.sh

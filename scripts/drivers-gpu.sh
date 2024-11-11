@@ -13,4 +13,4 @@ else
     echo "------ Placa de vídeo não identificada ou não requer driver adicional."
 fi
 
-source update-system.sh
+source ~/setup-ubuntu/scripts/update-system.sh

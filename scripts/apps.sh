@@ -148,7 +148,7 @@ for pkg in "${apps[@]}"; do
   sudo apt install -y "$pkg"
 done
 
-source update-system.sh
+source ~/setup-ubuntu/scripts/update-system.sh
 
 # Docker
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -189,6 +189,6 @@ sudo -v ; curl https://rclone.org/install.sh | sudo bash
 # Exa (cargo)
 cargo install exa
 
-source update-system.sh
+source ~/setup-ubuntu/scripts/update-system.sh
 
 echo "${colors[green]}------------ All apps and tools have been installed ------------"

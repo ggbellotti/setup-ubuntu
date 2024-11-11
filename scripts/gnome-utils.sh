@@ -21,6 +21,6 @@ for pkg in "${utils[@]}"; do
     sudo apt install -y "$pkg"
 done
 
-source update-system.sh
+source ~/setup-ubuntu/scripts/update-system.sh
 
 echo "------ All utils have been installed."

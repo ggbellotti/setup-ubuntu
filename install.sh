@@ -9,20 +9,20 @@ colors[neutral]="\033[0m"
 
 clear
 
-source scripts/hello.sh
+source ~/setup-ubuntu/scripts/hello.sh
 
-source scripts/check_os.sh
+source ~/setup-ubuntu/scripts/check_os.sh
 
-source scripts/update-system.sh
+source ~/setup-ubuntu/scripts/update-system.sh
 
-source scripts/add-ppas.sh
+source ~/setup-ubuntu/scripts/add-ppas.sh
 
-source scripts/drivers-gpu.sh
+source ~/setup-ubuntu/scripts/drivers-gpu.sh
 
-source scripts/apps.sh
+source ~/setup-ubuntu/scripts/apps.sh
 
-source scripts/gnome-utils.sh
+source ~/setup-ubuntu/scripts/gnome-utils.sh
 
-source scripts/customization.sh
+source ~/setup-ubuntu/scripts/customization.sh
 
-source scripts/byebye.sh
+source ~/setup-ubuntu/scripts/byebye.sh

@@ -15,7 +15,7 @@ cat << "EOF"
 (_________________)________________________________________/
 EOF
 
-source update-system.sh
+source ~/setup-ubuntu/scripts/update-system.sh
 
 gsettings set org.gnome.desktop.screensaver lock-enabled true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'suspend'
