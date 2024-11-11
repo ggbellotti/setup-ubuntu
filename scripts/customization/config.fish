@@ -9,6 +9,7 @@ set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
 # Add PATHs
+set --export PATH /home/$USER/.cargo/bin $PATH
 
 # Add APPs
 source ~/.asdf/asdf.fish

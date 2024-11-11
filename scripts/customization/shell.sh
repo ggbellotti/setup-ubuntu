@@ -4,8 +4,12 @@ mkdir -p ~/.config/fish
 cp ~/setup-ubuntu/scripts/customization/config.fish ~/.config/fish
 chsh -s /usr/bin/fish
 
-echo_green "Configuration plugins in fish..."
+sleep 3
+
+echo "------ Configuration plugins in fish..."
 fish ~/setup-ubuntu/scripts/customization/configure-fish.fish
+
+sleep 3
 
 # Starship
 curl -sS https://starship.rs/install.sh | sh

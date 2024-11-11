@@ -1,5 +1,7 @@
 echo -e "${colors[green]}------------ Customization ------------"
 
+source update-system.sh
+
 echo "------ Create folders and copy files..."
 mkdir ~/Videos/OBS
 mkdir ~/www
@@ -11,7 +13,7 @@ ssh-keygen -t rsa -C "guibellotti@hotmail.com" -f ~/.ssh/guilhermebellotti -N ""
 
 echo "------ Download themes, cursor, wallpapers etc..."
 BIBATA="https://api.github.com/repos/ful1e5/Bibata_Cursor/releases/latest"
-DOWNLOAD_URL=$(curl -s $BIBATA | jq -r '.assets[] | select(.name | endswith(".tar.gz")).browser_download_url')
+DOWNLOAD_URL=$(curl -s $BIBATA | jq -r '.assets[] | select(.name | endswith(".tar.xz")).browser_download_url')
 if [ -z "$DOWNLOAD_URL" ]; then
     echo "URL de download não encontrada."
     exit 1
@@ -31,7 +33,7 @@ echo "------ Installing icons..."
 cd ~/WhiteSur-icon-theme && chmod +x install.sh && ./install.sh -b
 
 echo "------ Installing fonts..."
-source scripts/customization/fonts.sh
+source customization/fonts.sh
 
 echo "------ Configuration shell..."
-source scripts/customization/shell.sh
+source customization/shell.sh

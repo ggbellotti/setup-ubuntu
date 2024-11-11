@@ -1,6 +1,10 @@
 # Ubuntu Setup Script
 Script for installing essential software, tools and customizations on Ubuntu.
 
+# Requirements to run the script
+```bash
+sudo apt install git -y
+```
 
 # How to use script
 ```bash

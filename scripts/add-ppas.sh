@@ -8,6 +8,7 @@ sudo add-apt-repository -y ppa:pj-assis/testing
 sudo add-apt-repository -y ppa:openrazer/stable
 sudo add-apt-repository -y ppa:fish-shell/release-3
 sudo add-apt-repository -y multiverse
+sudo add-apt-repository -y ppa:costales/folder-color
 
 sudo mkdir -p /etc/apt/keyrings
 wget -qO - https://repo.radeon.com/rocm/rocm.gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/rocm.gpg > /dev/null
@@ -22,4 +23,4 @@ sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/
 echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
 rm -f packages.microsoft.gpg
 
-source scripts/update-system.sh
+source update-system.sh

@@ -2,7 +2,6 @@ apps=(
   # Apps/softwares
   ubuntu-restricted-extras
   fish
-  exa
   bat
   compizconfig-settings-manager
   p7zip-full
@@ -31,13 +30,11 @@ apps=(
   imwheel
   meson
   libnss3-tools
-  libaio1
   libevince-dev
   gir1.2-gstreamer-1.0
   librust-gstreamer-audio-sys-dev
   libgtksourceview-4-dev
   libmusicbrainz5-dev
-  libwebkit2gtk-4.0-dev
   libgirepository1.0-dev
   ninja-build
   git-all
@@ -72,6 +69,9 @@ apps=(
   gir1.2-ayatanaappindicator3-0.1
   gnome-shell-extension-appindicator
   uidmap
+  libguvcview-dev
+  exa
+  bat
 )
 
 snapRepos=(
@@ -143,15 +143,17 @@ flatpakRepos=(
 
 echo -e "${colors[green]}------------ Install Apps and Tools ------------"
 
-# Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
-dockerd-rootless-setuptool.sh install
-
 for pkg in "${apps[@]}"; do
   echo "------ Installing $pkg..."
   sudo apt install -y "$pkg"
 done
+
+source update-system.sh
+
+# Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+dockerd-rootless-setuptool.sh install
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -166,8 +168,14 @@ for pkg in "${flatpakRepos[@]}"; do
   flatpak install flathub -y "$pkg"
 done
 
-cargo install exa bat rust
 sudo dpkg-reconfigure libdvd-pkg
+
+sudo gpasswd -a $USER plugdev
+
+sudo systemctl daemon-reload
+
+# Rust
+curl https://sh.rustup.rs -sSf | sh
 
 # Zoxide
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
@@ -178,4 +186,9 @@ cargo install --locked zellij
 # RClone
 sudo -v ; curl https://rclone.org/install.sh | sudo bash
 
-echo " ${colors[green]}------------ All apps and tools have been installed ------------"
+# Exa (cargo)
+cargo install exa
+
+source update-system.sh
+
+echo "${colors[green]}------------ All apps and tools have been installed ------------"
