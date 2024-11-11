@@ -1,5 +1,6 @@
 apps=(
   # Apps/softwares
+  libguvcview-dev
   ubuntu-restricted-extras
   fish
   bat
@@ -25,6 +26,8 @@ apps=(
   nala
   fzf
   virt-manager
+  gimagereader
+  tesseract-ocr
 
   # Tools
   imwheel
@@ -62,16 +65,16 @@ apps=(
   sassc
   libglib2.0-dev-bin
   imagemagick
-  dialog 
-  optipng 
+  dialog
+  optipng
   ffmpeg
   libayatana-appindicator3-1
   gir1.2-ayatanaappindicator3-0.1
   gnome-shell-extension-appindicator
   uidmap
-  libguvcview-dev
   exa
   bat
+  pandoc
 )
 
 snapRepos=(
