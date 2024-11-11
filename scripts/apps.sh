@@ -71,6 +71,7 @@ apps=(
   libayatana-appindicator3-1
   gir1.2-ayatanaappindicator3-0.1
   gnome-shell-extension-appindicator
+  uidmap
 )
 
 snapRepos=(
@@ -137,6 +138,7 @@ flatpakRepos=(
   org.qbittorrent.qBittorrent
   net.lutris.Lutris
   com.valvesoftware.Steam
+  io.beekeeperstudio.Studio
 )
 
 echo -e "${colors[green]}------------ Install Apps and Tools ------------"
@@ -144,6 +146,7 @@ echo -e "${colors[green]}------------ Install Apps and Tools ------------"
 # Docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
+dockerd-rootless-setuptool.sh install
 
 for pkg in "${apps[@]}"; do
   echo "------ Installing $pkg..."
@@ -155,7 +158,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 
 for pkg in "${snapRepos[@]}"; do
   echo "------ Installing $pkg..."
-  sudo snap install -y "$pkg"
+  sudo snap install "$pkg"
 done
 
 for pkg in "${flatpakRepos[@]}"; do

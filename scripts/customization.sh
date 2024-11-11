@@ -7,7 +7,6 @@ cp ~/setup-ubuntu/scripts/customization/config ~/.ssh/
 cp ~/setup-ubuntu/scripts/customization/.gitconfig ~/
 
 echo "------ Generate SSH..."
-mkdir ~/.ssh
 ssh-keygen -t rsa -C "guibellotti@hotmail.com" -f ~/.ssh/guilhermebellotti -N ""
 
 echo "------ Download themes, cursor, wallpapers etc..."
