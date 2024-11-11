@@ -25,4 +25,4 @@ source scripts/gnome-utils.sh
 
 source scripts/customization.sh
 
-source scripts/bye-bye.sh
+source scripts/byebye.sh

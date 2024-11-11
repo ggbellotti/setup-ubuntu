@@ -5,23 +5,18 @@ apps=(
   exa
   bat
   compizconfig-settings-manager
-  ffmpeg
   p7zip-full
-  imagemagick
   alacarte
   neovim
   gnome-sushi
   wine64
   guvcview
   dconf-editor
-  alacarte
   code
   gnome-shell-extensions
   wezterm
   obs-studio
-  steam
   httpie
-  neovim
   openrazer-meta
   docker-ce
   docker-ce-cli
@@ -37,10 +32,8 @@ apps=(
   meson
   libnss3-tools
   libaio1
-  libncurses5
   libevince-dev
   gir1.2-gstreamer-1.0
-  librust-gstreamer-audio-sys-dev
   librust-gstreamer-audio-sys-dev
   libgtksourceview-4-dev
   libmusicbrainz5-dev
@@ -81,13 +74,11 @@ apps=(
 )
 
 snapRepos=(
-  android-studio
   bluemail
   dbeaver-ce
   discord
   drawio
   emote
-  ferdi
   libreoffice
   postman
   slack
@@ -106,7 +97,6 @@ flatpakRepos=(
   com.github.micahflee.torbrowser-launcher
   com.github.tchx84.Flatseal
   com.github.unrud.VideoDownloader
-  com.google.AndroidStudio
   com.ktechpit.ultimate-media-downloader
   com.mattjakeman.ExtensionManager
   com.microsoft.Edge
@@ -126,6 +116,7 @@ flatpakRepos=(
   org.gimp.GIMP
   org.gnome.Boxes
   org.gnome.Geary
+  org.gnome.NetworkDisplays
   org.gustavoperedo.FontDownloader
   org.inkscape.Inkscape
   org.libretro.RetroArch
@@ -145,32 +136,26 @@ flatpakRepos=(
   com.heroicgameslauncher.hgl
   org.qbittorrent.qBittorrent
   net.lutris.Lutris
+  com.valvesoftware.Steam
 )
 
 echo -e "${colors[green]}------------ Install Apps and Tools ------------"
+
+# Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
 
 for pkg in "${apps[@]}"; do
   echo "------ Installing $pkg..."
   sudo apt install -y "$pkg"
 done
 
-# Configs
-
-# Docker
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
-sudo gpasswd -a $USER docker
-sudo systemctl enable docker.service
-sudo systemctl enable containerd.service
-sudo service docker start
-
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 for pkg in "${snapRepos[@]}"; do
   echo "------ Installing $pkg..."
-  sudo snap install "$pkg"
+  sudo snap install -y "$pkg"
 done
 
 for pkg in "${flatpakRepos[@]}"; do
@@ -190,4 +175,4 @@ cargo install --locked zellij
 # RClone
 sudo -v ; curl https://rclone.org/install.sh | sudo bash
 
-echo "------ All apps and tools have been installed."
+echo " ${colors[green]}------------ All apps and tools have been installed ------------"
