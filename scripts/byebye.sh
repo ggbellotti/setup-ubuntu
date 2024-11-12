@@ -20,5 +20,5 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'su
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'suspend'
 gsettings set org.gnome.desktop.session idle-delay 300
 
-echo "${colors[green]}------------ Copy keys to GitHub ------------"
+echo -e "${colors[green]}------------ Copy keys to GitHub ------------"
 cat ~/.ssh/guilhermebellotti.pub
