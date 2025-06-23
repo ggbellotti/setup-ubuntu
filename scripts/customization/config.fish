@@ -33,16 +33,46 @@ alias fishconfig="nano ~/.config/fish/config.fish"
 alias lgit="lazygit"
 alias ldocker="lazydocker"
 alias supabase="npx supabase"
-alias docker-clean "bash -c 'docker kill \$(docker ps -q) 2>/dev/null || true; docker rm -f \$(docker ps -aq) 2>/dev/null || true; docker volume rm \$(docker volume ls -q) 2>/dev/null || true; docker network prune -f 2>/dev/null || true; docker rmi -f \$(docker images -aq) 2>/dev/null || true;'"
-alias docker-remove='docker rm -f $(docker ps -aq) 2>/dev/null; docker volume rm $(docker volume ls -q) 2>/dev/null'
+alias act="./bin/act"
+alias docker-clean="bash -c 'docker kill \$(docker ps -q) 2>/dev/null || true; docker rm -f \$(docker ps -aq) 2>/dev/null || true; docker volume rm \$(docker volume ls -q) 2>/dev/null || true; docker network prune -f 2>/dev/null || true; docker rmi -f \$(docker images -aq) 2>/dev/null || true;'"
+# alias docker-remove='function _docker_remove() { docker ps -aq --filter "name=$1" --format "{{.Names}}" | while read container; do echo "Removendo container: $container"; docker rm -f $container; done; docker volume prune -f; }; _docker_remove'
+
+# Functions
+function docker-remove
+  set container_ids (docker ps -aq --filter "name=$argv")
+
+  if test (count $container_ids) -eq 0
+      echo "Nenhum container encontrado com o nome \"$argv\""
+  else
+      for container in $container_ids
+          echo "Removendo container: $container"
+          docker rm -f $container
+      end
+  end
+
+  set matching_volumes (docker volume ls -q | grep "$argv")
+  if test (count $matching_volumes) -eq 0
+      echo "Nenhum volume encontrado com o nome \"$argv\""
+  else
+      for volume in $matching_volumes
+          echo "Removendo volume: $volume"
+          docker volume rm -f $volume
+      end
+  end
+
+  echo "Removendo volumes órfãos não utilizados..."
+  docker volume prune -f
+end
+
 
 # Naut
-alias naut1back="cd $HOME/www/navenaut/v1/naut-backend/"
-alias naut2back="cd $HOME/www/navenaut/v2/naut-backend/"
-alias naut2front="cd $HOME/www/navenaut/v2/naut-frontend/"
+alias nb="cd $HOME/www/navenaut/naut-backend/"
+alias nf="cd $HOME/www/navenaut/naut-frontend/"
+alias nc="cd $HOME/www/navenaut/naut-checkout/"
+alias na="cd $HOME/www/navenaut/naut-app/"
 
 # Naut
-alias naut="cd $HOME/www/navenaut/naut"
+alias naut="cd $HOME/www/navenaut"
 
 # pnpm
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
